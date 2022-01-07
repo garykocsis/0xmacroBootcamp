@@ -81,15 +81,25 @@ contract Project is ERC721 {
         endDate= block.timestamp + 30 days;
     }
 
-        // Modifire to check  for owner
+        // Modifier to check  for owner
     modifier onlyOwner() {
         require(msg.sender == owner,"not owner");
         _;
     }
 
-       // Modifire to check  for open status 
+       // Modifier to check  for open status 
     modifier openStatus() {
         require(status == Status.Open, "project status must be open");
+        _;
+    }
+
+    // Modifire to check  with end date
+    modifier withinTime() {
+
+        if  (block.timestamp > endDate)
+           status = Status.Fail; 
+
+        require(status == Status.Open, "project past end date");
         _;
     }
 
@@ -97,18 +107,14 @@ contract Project is ERC721 {
         Minimum contribution is 0.1 ETH 
         Once goal is met, status is updated to Success*/
     
-    function contribute() external payable openStatus {
+    function contribute() external payable openStatus withinTime {
         require(msg.value >= MIN_CONTRIB, "minimum contribution not met");
  
         // if the contibutions puts the contract over its goal, then mark project as succss
         // if the contribution is past the enddate - accept the contribution, but then mark the contract as fail
-        if (address(this).balance >= goal){
+        if (address(this).balance >= goal)
           status = Status.Success; 
-        }
-        else if (block.timestamp > endDate){
-            status = Status.Fail; 
-        }
-        
+                
         // add the contributions to the senders mapping
         contributions[msg.sender] += msg.value;
        

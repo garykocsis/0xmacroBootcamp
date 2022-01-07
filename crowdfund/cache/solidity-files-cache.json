@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/gkocsis/hackerdao/student.gkocsis4200/crowdfund/contracts/Crowdfundr.sol": {
-      "lastModificationDate": 1641530785174,
-      "contentHash": "c348cb2c25168151e95fd2f2e791bdc6",
+      "lastModificationDate": 1641532748581,
+      "contentHash": "d71c23cb3460061b68e992001407a47e",
       "sourceName": "contracts/Crowdfundr.sol",
       "solcConfig": {
         "version": "0.8.3",

@@ -53,21 +53,14 @@ describe("Project", function () {
           value: contribAmt
         });
 
-       // await ethers.provider.send("evm_mine", [1747629703]);
-        //await provider.send("evm_increaseTime", [3600])
-        var ts = Math.round((new Date()).getTime() / 1000) + 2678400;
-        console.log(ts,"ts");
-        //await provider.send("evm_increaseTime", [ts]);
-        //await provider.send("evm_mine");
-        await ethers.provider.send("evm_mine", [1747629703]);
+        const addtitionalDays = 31 * 24 * 60 * 60;
+        await ethers.provider.send('evm_increaseTime', [addtitionalDays]);
+        await ethers.provider.send('evm_mine');
 
         contribAmt = ethers.utils.parseEther(".5");
-        await project.connect(addr1).contribute({
-          value: contribAmt
-        });
         
-        await expect(project.cancel()).to.be.revertedWith("project status must be open");
-        
+        await expect(project.contribute({value: contribAmt})).to.be.revertedWith("project past end date");
+       
       }); 
         
         it("add contribution total", async function () {
@@ -192,7 +185,26 @@ describe("Project", function () {
           
         });
 
-      });
+       it("open but past enddate", async function () {
+
+                
+        contribAmt = ethers.utils.parseEther("5");
+          await project.connect(addr1).contribute({
+             value: contribAmt
+          
+          });
+          expect(await project.status()).to.equal(0);
+
+          const addtitionalDays = 31 * 24 * 60 * 60;
+          await ethers.provider.send('evm_increaseTime', [addtitionalDays]);
+          await ethers.provider.send('evm_mine');
+          
+          await project.connect(addr1).withdraw();
+          expect(await project.status()).to.equal(2);
+          
+        }); 
+
+      }); 
 
       describe("Cancel", function () {
         it("revert", async function () {
