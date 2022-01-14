@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/gkocsis/hackerdao/student.gkocsis4200/ico/contracts/SpaceCoin.sol": {
-      "lastModificationDate": 1641871058770,
-      "contentHash": "e167813e84ada789ba43b75f733893d6",
+      "lastModificationDate": 1642148737481,
+      "contentHash": "481606d6daf6db43093a3a435a8c1d69",
       "sourceName": "contracts/SpaceCoin.sol",
       "solcConfig": {
         "version": "0.8.3",
@@ -185,8 +185,8 @@
       ]
     },
     "/Users/gkocsis/hackerdao/student.gkocsis4200/ico/contracts/SpaceICO.sol": {
-      "lastModificationDate": 1641874328533,
-      "contentHash": "5ce2900455cbe5e420df896e035ea184",
+      "lastModificationDate": 1642150568901,
+      "contentHash": "efc1b6742356c5e487678718cd6caef4",
       "sourceName": "contracts/SpaceICO.sol",
       "solcConfig": {
         "version": "0.8.3",
@@ -219,6 +219,41 @@
       ],
       "artifacts": [
         "SpaceICO"
+      ]
+    },
+    "/Users/gkocsis/hackerdao/student.gkocsis4200/ico/node_modules/hardhat/console.sol": {
+      "lastModificationDate": 1641863161113,
+      "contentHash": "cc4777addd464ea56fa35b1c45df0591",
+      "sourceName": "hardhat/console.sol",
+      "solcConfig": {
+        "version": "0.8.3",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.4.22 <0.9.0"
+      ],
+      "artifacts": [
+        "console"
       ]
     }
   }
