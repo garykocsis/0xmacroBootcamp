@@ -185,8 +185,8 @@
       ]
     },
     "/Users/gkocsis/hackerdao/student.gkocsis4200/ico/contracts/SpaceICO.sol": {
-      "lastModificationDate": 1642150568901,
-      "contentHash": "efc1b6742356c5e487678718cd6caef4",
+      "lastModificationDate": 1642172414943,
+      "contentHash": "1c1d93ce9f466dd78fc412d771680ffa",
       "sourceName": "contracts/SpaceICO.sol",
       "solcConfig": {
         "version": "0.8.3",

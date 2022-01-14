@@ -23,7 +23,11 @@ contract SpaceICO {
         General,
         Open        
     }
-    Phase public phase;    
+    Phase public phase;  
+
+    event Paused(
+        bool pausedInd
+     );  
 
     constructor() {
         owner = msg.sender;   
@@ -54,12 +58,15 @@ contract SpaceICO {
         if (phase == Phase.Seed)
            phase = Phase.General;
         else 
-           phase = Phase.Open;
+           phase = Phase.Open;        
     }
 
     //Pause or resume  
     function setPaused(bool _paused) external onlyOwner() { 
         paused = _paused;
+        emit Paused(
+              paused
+        );
     }
     
     //contribute - based on rules

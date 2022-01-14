@@ -218,6 +218,660 @@
       "SpaceICO": {
         "src": "contracts/SpaceICO.sol:6",
         "version": {
+          "withMetadata": "4201f5772f15ccc09a375fc7eb2968743d80bf3fac8550e0498e710725d4e105",
+          "withoutMetadata": "179acfc791883a212b69ee327cf732c40e37cdb5c86a410656e847a91d2b95de",
+          "linkedWithoutMetadata": "179acfc791883a212b69ee327cf732c40e37cdb5c86a410656e847a91d2b95de"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "()",
+          "addAllowList(address[])",
+          "nextPhase()",
+          "setPaused(bool)",
+          "contribute()",
+          "redeem()",
+          "setCoinAddress(address)",
+          "getTokensPurchased()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "SpaceICO",
+            "src": "contracts/SpaceICO.sol:32"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "SpaceICO",
+              "label": "totalAmt",
+              "type": "t_uint256",
+              "src": "contracts/SpaceICO.sol:11"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "coinAddress",
+              "type": "t_address",
+              "src": "contracts/SpaceICO.sol:12"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "owner",
+              "type": "t_address",
+              "src": "contracts/SpaceICO.sol:13"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "paused",
+              "type": "t_bool",
+              "src": "contracts/SpaceICO.sol:14"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "allowList",
+              "type": "t_mapping(t_address,t_bool)",
+              "src": "contracts/SpaceICO.sol:15"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "contributions",
+              "type": "t_mapping(t_address,t_uint256)",
+              "src": "contracts/SpaceICO.sol:16"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "genPhaseContr",
+              "type": "t_mapping(t_address,t_uint256)",
+              "src": "contracts/SpaceICO.sol:17"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "redeemed",
+              "type": "t_mapping(t_address,t_uint256)",
+              "src": "contracts/SpaceICO.sol:18"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "phase",
+              "type": "t_enum(Phase)878",
+              "src": "contracts/SpaceICO.sol:26"
+            }
+          ],
+          "types": {
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)"
+            },
+            "t_enum(Phase)878": {
+              "label": "enum SpaceICO.Phase",
+              "members": [
+                "Seed",
+                "General",
+                "Open"
+              ]
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      }
+    },
+    {
+      "ERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:35",
+        "version": {
+          "withMetadata": "2518bf932687efd624aeb08b3af5a505bb58df9a9138bdf6a059999f548c0125",
+          "withoutMetadata": "575c5160413ce582addde4a211c5258ab8c1045af2eeee360192553893308724",
+          "linkedWithoutMetadata": "575c5160413ce582addde4a211c5258ab8c1045af2eeee360192553893308724"
+        },
+        "inherit": [
+          "IERC20Metadata",
+          "IERC20",
+          "Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "(string,string)",
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "increaseAllowance(address,uint256)",
+          "decreaseAllowance(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC20",
+            "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:54"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC20",
+              "label": "_balances",
+              "type": "t_mapping(t_address,t_uint256)",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:36"
+            },
+            {
+              "contract": "ERC20",
+              "label": "_allowances",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:38"
+            },
+            {
+              "contract": "ERC20",
+              "label": "_totalSupply",
+              "type": "t_uint256",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:40"
+            },
+            {
+              "contract": "ERC20",
+              "label": "_name",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:42"
+            },
+            {
+              "contract": "ERC20",
+              "label": "_symbol",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:43"
+            }
+          ],
+          "types": {
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))"
+            },
+            "t_string_storage": {
+              "label": "string"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC20Metadata": {
+        "src": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol:13",
+        "inherit": [
+          "IERC20"
+        ],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Context": {
+        "src": "@openzeppelin/contracts/utils/Context.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "SpaceCoin": {
+        "src": "contracts/SpaceCoin.sol:6",
+        "version": {
+          "withMetadata": "145565a44c6e17a664a1cd08633dc075284a1ce869224d6545d48c71aaf2b6b8",
+          "withoutMetadata": "aaabcdb8815dccc7008763df4a69cf0fb8128f31949a02cc80a2b59f0c34df16",
+          "linkedWithoutMetadata": "aaabcdb8815dccc7008763df4a69cf0fb8128f31949a02cc80a2b59f0c34df16"
+        },
+        "inherit": [
+          "ERC20",
+          "IERC20Metadata",
+          "IERC20",
+          "Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "toggleTax(bool)",
+          "mint(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "SpaceCoin",
+            "src": "contracts/SpaceCoin.sol:14"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "initialSupply",
+            "src": "contracts/SpaceCoin.sol:9"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "SpaceCoin",
+              "label": "initialSupply",
+              "type": "t_uint256",
+              "src": "contracts/SpaceCoin.sol:9"
+            },
+            {
+              "contract": "SpaceCoin",
+              "label": "taxable",
+              "type": "t_bool",
+              "src": "contracts/SpaceCoin.sol:10"
+            },
+            {
+              "contract": "SpaceCoin",
+              "label": "treasury",
+              "type": "t_address",
+              "src": "contracts/SpaceCoin.sol:11"
+            },
+            {
+              "contract": "SpaceCoin",
+              "label": "owner",
+              "type": "t_address",
+              "src": "contracts/SpaceCoin.sol:12"
+            }
+          ],
+          "types": {
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_address": {
+              "label": "address"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "SpaceICO": {
+        "src": "contracts/SpaceICO.sol:6",
+        "version": {
+          "withMetadata": "2cbe9809d9bd35b37df395d65962c02b018e428b3223b3add19cc9c0f0cd3617",
+          "withoutMetadata": "179acfc791883a212b69ee327cf732c40e37cdb5c86a410656e847a91d2b95de",
+          "linkedWithoutMetadata": "179acfc791883a212b69ee327cf732c40e37cdb5c86a410656e847a91d2b95de"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "()",
+          "addAllowList(address[])",
+          "nextPhase()",
+          "setPaused(bool)",
+          "contribute()",
+          "redeem()",
+          "setCoinAddress(address)",
+          "getTokensPurchased()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "SpaceICO",
+            "src": "contracts/SpaceICO.sol:32"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "SpaceICO",
+              "label": "totalAmt",
+              "type": "t_uint256",
+              "src": "contracts/SpaceICO.sol:11"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "coinAddress",
+              "type": "t_address",
+              "src": "contracts/SpaceICO.sol:12"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "owner",
+              "type": "t_address",
+              "src": "contracts/SpaceICO.sol:13"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "paused",
+              "type": "t_bool",
+              "src": "contracts/SpaceICO.sol:14"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "allowList",
+              "type": "t_mapping(t_address,t_bool)",
+              "src": "contracts/SpaceICO.sol:15"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "contributions",
+              "type": "t_mapping(t_address,t_uint256)",
+              "src": "contracts/SpaceICO.sol:16"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "genPhaseContr",
+              "type": "t_mapping(t_address,t_uint256)",
+              "src": "contracts/SpaceICO.sol:17"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "redeemed",
+              "type": "t_mapping(t_address,t_uint256)",
+              "src": "contracts/SpaceICO.sol:18"
+            },
+            {
+              "contract": "SpaceICO",
+              "label": "phase",
+              "type": "t_enum(Phase)878",
+              "src": "contracts/SpaceICO.sol:26"
+            }
+          ],
+          "types": {
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)"
+            },
+            "t_enum(Phase)878": {
+              "label": "enum SpaceICO.Phase",
+              "members": [
+                "Seed",
+                "General",
+                "Open"
+              ]
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      }
+    },
+    {
+      "ERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:35",
+        "version": {
+          "withMetadata": "2518bf932687efd624aeb08b3af5a505bb58df9a9138bdf6a059999f548c0125",
+          "withoutMetadata": "575c5160413ce582addde4a211c5258ab8c1045af2eeee360192553893308724",
+          "linkedWithoutMetadata": "575c5160413ce582addde4a211c5258ab8c1045af2eeee360192553893308724"
+        },
+        "inherit": [
+          "IERC20Metadata",
+          "IERC20",
+          "Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "(string,string)",
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "increaseAllowance(address,uint256)",
+          "decreaseAllowance(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC20",
+            "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:54"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC20",
+              "label": "_balances",
+              "type": "t_mapping(t_address,t_uint256)",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:36"
+            },
+            {
+              "contract": "ERC20",
+              "label": "_allowances",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:38"
+            },
+            {
+              "contract": "ERC20",
+              "label": "_totalSupply",
+              "type": "t_uint256",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:40"
+            },
+            {
+              "contract": "ERC20",
+              "label": "_name",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:42"
+            },
+            {
+              "contract": "ERC20",
+              "label": "_symbol",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:43"
+            }
+          ],
+          "types": {
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))"
+            },
+            "t_string_storage": {
+              "label": "string"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC20Metadata": {
+        "src": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol:13",
+        "inherit": [
+          "IERC20"
+        ],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Context": {
+        "src": "@openzeppelin/contracts/utils/Context.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "SpaceCoin": {
+        "src": "contracts/SpaceCoin.sol:6",
+        "version": {
+          "withMetadata": "145565a44c6e17a664a1cd08633dc075284a1ce869224d6545d48c71aaf2b6b8",
+          "withoutMetadata": "aaabcdb8815dccc7008763df4a69cf0fb8128f31949a02cc80a2b59f0c34df16",
+          "linkedWithoutMetadata": "aaabcdb8815dccc7008763df4a69cf0fb8128f31949a02cc80a2b59f0c34df16"
+        },
+        "inherit": [
+          "ERC20",
+          "IERC20Metadata",
+          "IERC20",
+          "Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "toggleTax(bool)",
+          "mint(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "SpaceCoin",
+            "src": "contracts/SpaceCoin.sol:14"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "initialSupply",
+            "src": "contracts/SpaceCoin.sol:9"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "SpaceCoin",
+              "label": "initialSupply",
+              "type": "t_uint256",
+              "src": "contracts/SpaceCoin.sol:9"
+            },
+            {
+              "contract": "SpaceCoin",
+              "label": "taxable",
+              "type": "t_bool",
+              "src": "contracts/SpaceCoin.sol:10"
+            },
+            {
+              "contract": "SpaceCoin",
+              "label": "treasury",
+              "type": "t_address",
+              "src": "contracts/SpaceCoin.sol:11"
+            },
+            {
+              "contract": "SpaceCoin",
+              "label": "owner",
+              "type": "t_address",
+              "src": "contracts/SpaceCoin.sol:12"
+            }
+          ],
+          "types": {
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_address": {
+              "label": "address"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "SpaceICO": {
+        "src": "contracts/SpaceICO.sol:6",
+        "version": {
           "withMetadata": "cec3281e7dc8dce18753676e4ddbf690989da7ba4b3e90c25786ebcf26aa5657",
           "withoutMetadata": "f376181fcacce872d3bde7596f04403520868e3c3c5a3ed2287ccce311cc4d71",
           "linkedWithoutMetadata": "f376181fcacce872d3bde7596f04403520868e3c3c5a3ed2287ccce311cc4d71"
