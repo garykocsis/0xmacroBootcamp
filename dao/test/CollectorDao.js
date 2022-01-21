@@ -18,8 +18,6 @@ describe("CollectorDao", function () {
     let v;      
     
     
-   // let abiCoder = ethers.utils.defaultAbiCoder;
-
     // before each test deploy new instance of contract  
     beforeEach(async () => { 
         [owner, addr1, addr2, addr3, addr4,treas, ...addrs] = await ethers.getSigners();
@@ -518,6 +516,7 @@ it("Should execute winning proposal", async function () {
        await (collectorDao.execute(1))
        const p = await collectorDao.proposals(1);      
        expect( await p.executed).to.equal(true);
+       
 });
 });
 
@@ -529,33 +528,17 @@ describe("execute function for marketplace", function() {
         await collectorDao.connect(addr2).buyMembership({value: contribAmt}); 
         await collectorDao.connect(addr3).buyMembership({value: contribAmt}); 
         await collectorDao.connect(addr4).buyMembership({value: contribAmt}); 
-    
- 
-      
-    let price = ethers.utils.parseEther("1");
-
+           
+    let price = ethers.utils.parseEther("1");   
   
-  
-
-   
-   /*await collectorDao.propose(
-            [collectorDao.address],
-            ['0'],
-            ["buyPriceLess(NftMarketplace)"],
-            [abiCoder.encode(['address'], [addr1.address])],
-            ethers.utils.keccak256(abiCoder.encode(['string'],
-            ["Best thing ever"]))); */
-
-     await collectorDao.propose([collectorDao.address],['0'],["getwith(address,uint)"],
-        [abiCoder.encode(['address','uint'], [addr1.address,1])],
-         ethers.utils.keccak256(abiCoder.encode(['string'], 
-        ["Best thing ever"])));        
-
-  
-
-
-
-       
+    await collectorDao.propose(
+          [collectorDao.address],
+          ['0'],
+          ["buyPriceLess(NftMarketplace,address,uint,uint)"],
+          [abiCoder.encode(['address','address','uint','uint'], [priceLessNft.address,addr1.address,1,price])],
+          ethers.utils.keccak256(abiCoder.encode(['string'],
+          ["Best thing ever"])));
+           
         const domain = {
             name: 'Collector Dao',
                    chainId:  1,
@@ -575,8 +558,8 @@ describe("execute function for marketplace", function() {
             signature = await owner._signTypedData(domain,types,ballot);  
     
              r = '0x' + signature.substring(2).substring(0, 64);
-              s = '0x' + signature.substring(2).substring(64, 128);
-              v = '0x' + signature.substring(2).substring(128, 130);
+             s = '0x' + signature.substring(2).substring(64, 128);
+             v = '0x' + signature.substring(2).substring(128, 130);
     
             signature = await addr1._signTypedData(domain,types,ballot);
             const r1 = '0x' + signature.substring(2).substring(0, 64);
@@ -588,8 +571,7 @@ describe("execute function for marketplace", function() {
             const s2 = '0x' + signature.substring(2).substring(64, 128);
             const v2 = '0x' + signature.substring(2).substring(128, 130);
             
-    
-    
+        
            await collectorDao.castVoteBySig(1,1,v,r,s);
            await collectorDao.connect(addr1).castVoteBySig(1,1,v1,r1,s1);
            await collectorDao.connect(addr2).castVoteBySig(1,1,v2,r2,s2);
