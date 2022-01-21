@@ -38,6 +38,7 @@ Voting system:   Token base voting (although not using tokens - Based on members
                   Members need to vote by signature (Only members can vote - and one vote per member  - No delegation allowed
                   To save on guess fees, members can sign a vote and provide it to another member, for bulk voting (ie- send in batches)) 
                   Members can abstain - which will be counted for the quorumm   
+                
 
 Shortfall of token voting are:
 Whales have a large influence. A few people end up making deciding swings in most proposals.

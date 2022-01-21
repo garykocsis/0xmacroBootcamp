@@ -6,14 +6,10 @@
     
 	
 	contract PriceLessNft is NftMarketplace {
-	  mapping (uint => address) public tokens; 
-	  uint price = 2 ether;
+	   mapping (uint => address) public tokens; 
+	   uint price = 2 ether;
 
-	  constructor(){     
-        console.log("PriceLess new");
-    
-    }
-	// retreives price of an NFT 
+	  // retreives price of an NFT 
 	  function getPrice(address _addr, uint256 _tokenId) override external view returns (uint256) {
        
 	    return price;
