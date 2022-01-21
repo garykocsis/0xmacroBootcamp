@@ -516,6 +516,8 @@ it("Should execute winning proposal", async function () {
                               [addtitionalDays]);
        await ethers.provider.send('evm_mine');
        await (collectorDao.execute(1))
+       const p = await collectorDao.proposals(1);      
+       expect( await p.executed).to.equal(true);
 });
 });
 
@@ -529,63 +531,28 @@ describe("execute function for marketplace", function() {
         await collectorDao.connect(addr4).buyMembership({value: contribAmt}); 
     
  
-      /*await collectorDao.propose([collectorDao.address],['0'],["getwith(address,uint256)"],
-        [abiCoder.encode(['address','uint'], [addr1.address,1])],      
-       ethers.utils.keccak256(abiCoder.encode(['string'], 
-       ["Best thing ever"]))); */
-
-
-     //  ["buyPriceLess(NftMarketplace,address,uint256,uint256)"],
-       // [abiCoder.encode(['NftMarketplace','address','uint256','uint256'],
-
+      
     let price = ethers.utils.parseEther("1");
 
-    //["buyPriceLess(NftMarketplace,address, uint256, uint256)"],
+  
+  
 
-    console.log("priceless addtess",priceLessNft.address);
-    console.log("addr3 addtess",addr3.address);
-    console.log("price",price);
+   
+   /*await collectorDao.propose(
+            [collectorDao.address],
+            ['0'],
+            ["buyPriceLess(NftMarketplace)"],
+            [abiCoder.encode(['address'], [addr1.address])],
+            ethers.utils.keccak256(abiCoder.encode(['string'],
+            ["Best thing ever"]))); */
 
-  /* await collectorDao.propose([collectorDao.address],
-        ['0'],
-         ["buyPriceLess(address, uint256, uint256)"],
-         [abiCoder.encode(['address','uint256','uint256'], 
-         [addr3.address,1,price])],              
-      ethers.utils.keccak256(abiCoder.encode(['string'], 
-      ["Best thing ever"])));  */
+     await collectorDao.propose([collectorDao.address],['0'],["getwith(address,uint)"],
+        [abiCoder.encode(['address','uint'], [addr1.address,1])],
+         ethers.utils.keccak256(abiCoder.encode(['string'], 
+        ["Best thing ever"])));        
 
-      /*await collectorDao.propose([collectorDao.address],
-        ['0'],
-         ["buyPriceLess(address)"],
-         [abiCoder.encode(['address'], 
-         [priceLessNft.address,])],              
-      ethers.utils.keccak256(abiCoder.encode(['string'], 
-      ["Best thing ever"]))); */
+  
 
-   /*   await collectorDao.propose([collectorDao.address],['0'],["buyPriceLess(address,uint256)"],
-      [abiCoder.encode(['address','uint'], [addr1.address,1])],      
-     ethers.utils.keccak256(abiCoder.encode(['string'], 
-     ["Best thing ever"]))); */
-
-    /* await collectorDao.propose([collectorDao.address],['0'],["buyPriceLess(address,uint256,uint256)"],
-     [abiCoder.encode(['address','uint','uint'], [addr1.address,addr1.address,1])],      
-    ethers.utils.keccak256(abiCoder.encode(['string'], 
-    ["Best thing ever"]))); */
-
-    /*await collectorDao.propose([collectorDao.address],['0'],["buyPriceLess(address,address,uint256,uint256)"],
-     [abiCoder.encode(['address','address','uint','uint'], [addr1.address,addr1.address,1,price])],      
-    ethers.utils.keccak256(abiCoder.encode(['string'], 
-    ["Best thing ever"]))); */
-
-    /*await collectorDao.propose([collectorDao.address],['0'],["buyPriceLess(address,address,uint256,uint256)"],
-    [abiCoder.encode(['address','address','uint','uint'], [priceLessNft.address,addr1.address,1,price])],      
-   ethers.utils.keccak256(abiCoder.encode(['string'], 
-   ["Best thing ever"]))); */
-
-   await collectorDao.propose([collectorDao.address],['0'],["buyPriceLess(Marketplace,address,uint256,uint256)"],
-    [abiCoder.encode(['address','address','uint','uint'], [priceLessNft.address,addr1.address,1,price])],      
-   ethers.utils.keccak256(abiCoder.encode(['string'], 
-   ["Best thing ever"]))); 
 
 
        
@@ -632,6 +599,8 @@ describe("execute function for marketplace", function() {
                                   [addtitionalDays]);
            await ethers.provider.send('evm_mine');
            await (collectorDao.execute(1))
+           const p = await collectorDao.proposals(1);      
+           expect( await p.executed).to.equal(true);
     });
     });
 });

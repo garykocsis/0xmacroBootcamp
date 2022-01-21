@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.3;
 
-import "hardhat/console.sol";
-//import "./NftMarketplace.sol"; 
 import "./test/PriceLessNft.sol";
 
 contract CollectorDao {
@@ -206,9 +204,7 @@ contract CollectorDao {
         //loop through the various function calls  
         for (uint i = 0; i < proposal.targets.length; i++) {
 
-           console.log("target",proposal.targets[i]);
-           console.log("signatures",proposal.signatures[i]);
-           bytes memory callData;
+            bytes memory callData;
 
            if (bytes(proposal.signatures[i]).length == 0) 
               callData = proposal.calldatas[i];
@@ -216,7 +212,7 @@ contract CollectorDao {
             callData = abi.encodePacked(bytes4(keccak256(bytes(proposal.signatures[i]))), proposal.calldatas[i]);
             execution = true;
         
-           (bool success,bytes memory returnData ) = 
+           (bool success,) = 
                 proposal.targets[i].call{value: proposal.values[i]}(callData);
             require(success, "Contract execution Failed"); 
             execution = false;       
@@ -224,16 +220,21 @@ contract CollectorDao {
      }
 
     // Test function to test arbitrary functions
-    function getBalanceOf(address addr) public pure returns (bool){
-   
+    function getBalanceOf(address addr) public pure returns (bool){   
+           return true;
+    }   
+   // Test function to test arbitrary functions
+     function getwith(address adr,uint256 y) public pure returns (bool){   
            return true;
     } 
-  
-  // Test function to test arbitrary functions
-     function getwith(address adr,uint256 y) public pure returns (bool){
-   
-           return true;
-    } 
+
+    function buyPriceLess(NftMarketplace market, address nftContract, uint256 nftId, uint256 maxPrice) public {
+      require(execution,  "NOT_EXECUTION_STATE");
+        uint256 price = market.getPrice(nftContract, nftId);
+        require(price <= maxPrice, "INSUFFICIENT_FUNDS");
+        (bool success) = market.buy{ value: price }(nftContract, nftId);
+         require(success, "FAIL PURCHASE");
+  } 
 
     //Calculates quorom 
     function quorumVotes() private view returns (uint256) {
@@ -248,79 +249,8 @@ contract CollectorDao {
 
    //Used to addition 
    function add256(uint256 a, uint256 b) internal pure returns (uint256) {
-        uint c = a + b;
-    
+        uint c = a + b;    
         return c;
-    }
-
-    
-
-    //function buyPriceLess(address nftContract) external{
-      //  console.log("here in buyPriceLess");
-
-//}
-
-  function buyPriceLess(
-      address market,
-      address nftContract,
-      uint256 nftId,
-      uint256 maxPrice
-  ) public {}
-
-
+    } 
   
-//SpaceCoin(coinAddress).transfer(recipient,amount);
-  /*  function buyPriceLess(
-    address nftContract,
-    uint256 nftId, 
-    uint256 maxPrice
-    ) public{
-  }*/
-
-//SpaceCoin(coinAddress).transfer(recipient,amount);
-   /* function buyPriceLess(
-    //NftMarketplace market, 
-    address market, 
-    address nftContract,
-    uint256 nftId, 
-    uint256 maxPrice
-    ) external {
-        require(execution,  "NOT_EXECUTION_STATE");
-        console.log("here in buyPriceLess");
-        //uint256 price = market.getPrice(nftContract, nftId);
-        //require(price <= maxPrice, "INSUFFICIENT_FUNDS");
-        // (bool success) = market.buy{ value: price }(nftContract, nftId);
-         // require(success, "FAIL PURCHASE")      
-
-    }*/
-
- //require(price <= maxPrice, "INSUFFICIENT_FUNDS");
- /* function buyPriceLess(
-    //NftMarketplace market, 
-    address nftContract, 
-    uint nftId, 
-    uint maxPrice
-    ) external {
-        require(execution,  "NOT_EXECUTION_STATE");
-        console.log("here in buyPriceLess");
-        //uint256 price = market.getPrice(nftContract, nftId);
-        require(price <= maxPrice, "INSUFFICIENT_FUNDS");
-         // (bool success) = market.buy{ value: price }(nftContract, nftId);
-         // require(success, "FAIL PURCHASE")
-    )
-    } */
-
-  /*function buyPriceLess(
-       //  NftMarketplace market, 
-         address nftContract, 
-         uint Id, 
-         uint maxPrice)
-        internal {
-            
-        require(execution,  "NOT_EXECUTION_STATE");       
-          uint256 price = market.getPrice(nftContract, nftId);
-          require(price <= maxPrice, "INSUFFICIENT_FUNDS");
-          (bool success) = market.buy{ value: price }(nftContract, nftId);
-          require(success, "FAIL PURCHASE"); 
-        }*/
 }
