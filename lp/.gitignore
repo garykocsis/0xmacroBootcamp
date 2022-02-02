@@ -1,0 +1,17 @@
+#JS
+node_modules
+.env
+coverage
+coverage.json
+typechain
+process.env
+
+.DS_Store
+
+#Hardhat files
+cache
+artifacts
+
+#Parcel files
+.parcel-cache
+dist
