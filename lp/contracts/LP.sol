@@ -66,10 +66,8 @@ contract LP is ERC20 {
         uint _totalSupply = totalSupply();   // get total supply of LP tokens  - totalSupply() is an override    
         if (_totalSupply == 0) {
            liquidity = sqrt(amountSpc * amountEth) - MINIMUM_LIQUIDITY;
+           _mint(address(1), MINIMUM_LIQUIDITY); // permanently lock the first MINIMUM_LIQUIDITY tokens
         } else {
-            // add the MINIMUM_LIQUIDITY back into the totaSupply to determine liquidity. This
-            // will ensure that total liquidity will never be drained from the pool. 
-            //_totalSupply += MINIMUM_LIQUIDITY;  //permanently lock the first MINIMUM_LIQUIDITY 
             liquidity = min(amountSpc * _totalSupply / _reserveSpc, amountEth * _totalSupply / _reserveEth);
         }
         require(liquidity > 0, "INSUFFICIENT_LIQUIDITY_MINTED");
@@ -97,7 +95,7 @@ contract LP is ERC20 {
         spaceCoin.transfer(to, amountSpc);
         lpEthTotal -= amountEth;
         (bool sent,) = to.call{value: amountEth}("");
-        require(sent, "FAILURE_SENDING_ETHER_TO_LP");
+        require(sent, "FAILURE_SENDING_ETHER");
         
         reserveSpc = spaceCoin.balanceOf(address(this));
         reserveEth = lpEthTotal;
@@ -137,7 +135,7 @@ contract LP is ERC20 {
              require(sent, "FAILURE_SENDING_ETHER_ON_SWAP");
         }
 
-        //getbalance
+        //update balance
         uint balanceSpc = spaceCoin.balanceOf(address(this));
         uint balanceEth = lpEthTotal;
 
@@ -153,16 +151,7 @@ contract LP is ERC20 {
         reserveSpc = balanceSpc;
         reserveEth = balanceEth;
     }
-
-    // Add the MINIMUM_LIQUIDITY back into the totaSupply to determine liquidity after inital deposit 
-    // Because can't override _mint to bypass minting to address(0)
-    // This will allow the pool to never be depleted   
-    function totalSupply() public view  virtual override returns (uint) {   
-        uint _totalSupply = super.totalSupply();
-         if (_totalSupply > 0)
-           _totalSupply += MINIMUM_LIQUIDITY;  
-        return _totalSupply;
-    }    
+  
 
     function min(uint x, uint y) private pure returns (uint z) {
         z = x < y ? x : y;

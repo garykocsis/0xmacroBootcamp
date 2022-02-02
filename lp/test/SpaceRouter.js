@@ -58,6 +58,9 @@ describe("SpaceRouter", function () {
       describe("Add liquidity", function () {
         it("Should add liquidity", async function () {
 
+          // should revert phase not open  
+          await expect(spaceico.withdrawToLP("15000000000000000000000")).to.be.revertedWith("PHASE NOT OPEN");
+
           // set to open phase   
           await spaceico.nextPhase();
           await spaceico.nextPhase();
@@ -74,13 +77,12 @@ describe("SpaceRouter", function () {
           
           //Treasury will approve the Transfer amount for the spacerouter to spend prior to the call in the 
           //SpaceICO to withdraw
-          
-          await spacecoin.connect(addr4).approve(spacerouter.address,transferAmt);
 
-                  
-         // request space ico to withdraw from ICO contract and add the liquidity to LP pool via
-         // the SpaceRouter contract
-         //await spaceico.withdrawToLP(transferAmt);
+          //check to endure ERC token transfer is approved 
+          await expect(spaceico.withdrawToLP(transferAmt)).to.be.revertedWith("NOT_APPROVED");
+
+              
+          await spacecoin.connect(addr4).approve(spacerouter.address,transferAmt);
 
            // lp tokens return 67082.03932499369088227'
           let liq = ethers.utils.parseEther("6708.203932499369088227");
@@ -134,9 +136,6 @@ describe("SpaceRouter", function () {
           expect(await lp.balanceOf(treasury)).to.equal(checkLp);
 
           let y = await lp.balanceOf(treasury)
-
-          console.log("check bignumber", await lp.balanceOf(treasury));
-          console.log("check bignumber2", ethers.BigNumber.from(y));
           
          
        }); 
@@ -224,6 +223,13 @@ describe("SpaceRouter", function () {
       let swapAmt = ethers.utils.parseEther("10"); // 10 eth 
       //  let expMinRtnAmt = "50000000000000000000"; // 50 spc tokens 
       let expMinRtnAmt = "49784218552221103724"; // 50 spc tokens  1 %
+
+      //test for invalid eth amount sent 
+      await expect(spacerouter.connect(addr1).swapEthForSpc(expMinRtnAmt,addr1.address)).to.be.revertedWith("INVALID_ETH_SENT");
+
+      //test for insufficient spc tokens
+      await expect(spacerouter.connect(addr1).swapEthForSpc('49884218552221103724',addr1.address,{value: swapAmt}))
+      .to.be.revertedWith("INSUFFICIENT_SPC_COINS");
       
       await expect(spacerouter.connect(addr1).swapEthForSpc(expMinRtnAmt,addr1.address, {value: swapAmt}))
       .to.emit(spacerouter, 'SwapEth').withArgs('49784218552221103724')
@@ -253,12 +259,17 @@ describe("SpaceRouter", function () {
       await spacecoin.connect(addr4).approve(spacerouter.address,transferAmt);
       await spaceico.withdrawToLP(transferAmt);
 
-      let expMinRtnAmt = ethers.utils.parseEther("9.5"); // 10 eth 
+      let expMinRtnAmt = ethers.utils.parseEther("9.7"); // will cause issue 
       let swapAmt = "50000000000000000000"; // 50 spc tokens 
 
       await spaceico.connect(addr3).redeem();
 
       await spacecoin.connect(addr3).approve(spacerouter.address,swapAmt);
+
+      //Test for slippage
+      await expect(spacerouter.connect(addr3).swapSpcForEth(swapAmt,expMinRtnAmt,addr3.address)).to.be.revertedWith("INSUFFICIENT_ETH");
+
+     expMinRtnAmt = ethers.utils.parseEther("9.5"); //  
       
       await expect(spacerouter.connect(addr3).swapSpcForEth(swapAmt,expMinRtnAmt,addr3.address))
       .to.emit(spacerouter, 'SwapSpc').withArgs('9668053808187360882')

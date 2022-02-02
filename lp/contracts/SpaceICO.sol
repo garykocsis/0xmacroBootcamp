@@ -158,7 +158,7 @@ contract SpaceICO {
         require(phase == Phase.Open,"PHASE NOT OPEN"); 
         //Treasury will have the spaceTokens - thus check to see if the treasury approved the transfer to SpaceRouter prior to
         // this contract call.  We can check the allowance to confirm the prior approval
-        require(spaceCoin.allowance(treasury,address(router)) >= tokens,"Not Enough Balance");
+        require(spaceCoin.allowance(treasury,address(router)) >= tokens,"NOT_APPROVED");
         uint ethAmt = tokens / 5; // ratio should be 5 Spacecoins to 1 Eth 
         require(address(this).balance >= ethAmt); //Make sure have enough Eth in this contract 
         router.addLiquidity{value: ethAmt}(tokens,treasury);
