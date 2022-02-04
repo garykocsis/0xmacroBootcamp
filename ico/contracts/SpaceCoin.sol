@@ -1,43 +1,46 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.3;
 
+import './SpaceICO.sol';
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract SpaceCoin is ERC20 {
 
-    uint constant public MAX_SUPPLY = 500000 * 10**18;  
-    uint public initialSupply = 150000 * 10**18;  
-    bool public taxable;          // Will indicate if transfer is taxable
-    address public treasury;     // account used to keep tax revenue  
+    uint128 constant public MAX_SUPPLY = 500000 * 10**18;  
+    uint256 public initialSupply = 150000 * 10**18;  //30000 ETH  * 5 SPC   5:1 ration
+    bool public taxable;  // Will indicate if transfer is taxable
+    
+    address public ico;       // address of the ico contract
+    address public treasury;  // account used to keep revenue  
     address public owner;
 
-    constructor(address _treasury, address _owner) ERC20("SPACECOIN", "SPC") {    
-        _mint(msg.sender, initialSupply);
+    event ContractAddress(
+        address ico     
+    );
+
+    constructor(address _treasury) ERC20("SPACECOIN", "SPC") {    
         treasury = _treasury;
-        owner = _owner;
+        owner = msg.sender;
+
+       ico = address(new SpaceICO(owner, this, _treasury)); // deploy the ico contract
+       
+       _mint(ico, initialSupply);  // mint initial supply to the ico contract address
+       _mint(treasury,MAX_SUPPLY - initialSupply); // mint remaining tokens to treasury   
+
+        emit ContractAddress(address(ico));   
     }
 
     function toggleTax(bool _taxable) external {
         require(msg.sender == owner,"NOT OWNER");
         taxable = _taxable;
     }
-    
-    // Check to make sure tokens minted does not exceed and only treasury account can mint
-    function mint(address _treasury, uint256 amount) external {  
-        // treasury can only mint additional mint request after initial nimt  
-        
-        require(msg.sender == treasury && _treasury == treasury,"ONLY TREASURY CAN MINT");
-        uint total = super.totalSupply() + amount;
-        require(total <= MAX_SUPPLY,"MAX TOKENS");
-        super._mint(_treasury, amount);
-    }
-    
+            
 //Override the _transfer function to calculate the tax
-    function _transfer(address sender, address recipient, uint amount) internal override {    
-       uint tax; // used to calculate tax 
-       if (taxable) {      
-          tax = uint(amount * 2/100);  //Tax is 2 %
-          amount = uint(amount - tax);
+    function _transfer(address sender, address recipient, uint amount) internal  virtual override {    
+       
+       if (taxable) {    
+          uint tax = amount * 2/100;  //Tax is 2 %
+          amount = amount - tax;
           // reduce the tax amount from sender balance and add to treasury balance
           super._transfer(sender, treasury, tax);
        }   

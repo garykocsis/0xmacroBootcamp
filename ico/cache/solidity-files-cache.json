@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/gkocsis/hackerdao/student.gkocsis4200/ico/contracts/SpaceCoin.sol": {
-      "lastModificationDate": 1642148737481,
-      "contentHash": "481606d6daf6db43093a3a435a8c1d69",
+      "lastModificationDate": 1643955400680,
+      "contentHash": "a1b0587844dcbe3eec7112abc37704e3",
       "sourceName": "contracts/SpaceCoin.sol",
       "solcConfig": {
         "version": "0.8.3",
@@ -29,6 +29,7 @@
         }
       },
       "imports": [
+        "./SpaceICO.sol",
         "@openzeppelin/contracts/token/ERC20/ERC20.sol"
       ],
       "versionPragmas": [
@@ -185,8 +186,8 @@
       ]
     },
     "/Users/gkocsis/hackerdao/student.gkocsis4200/ico/contracts/SpaceICO.sol": {
-      "lastModificationDate": 1642172414943,
-      "contentHash": "1c1d93ce9f466dd78fc412d771680ffa",
+      "lastModificationDate": 1643960065445,
+      "contentHash": "b45bad5228114bbc3b2fda000ceea5be",
       "sourceName": "contracts/SpaceICO.sol",
       "solcConfig": {
         "version": "0.8.3",

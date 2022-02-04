@@ -32,4 +32,7 @@ Allows the user to deposit ETH into your ICO contract
 Shows error messages when user makes an invalid request (i.e. attempting to deposit beyond the limit)
 
 Design Exercises
-The base requirements give contributors their SPC tokens immediately. How would you design your contract to vest the awarded tokens instead, i.e. award tokens to users over time, linearly?   I would keep a date when people contributed. Based on the date ans certain time period has elasped, I would open up the redeem function. 
+The base requirements give contributors their SPC tokens immediately. How would you design your contract to vest the awarded tokens instead, i.e. award tokens to users over time, linearly? 
+
+ I would allow user to be able to redeem quaterly for up to 4 quarters.  25% of their total SPC for each quarter. It would be based on their starting date of purchase. Thus, I would need to keep track of the starting date of each purchase and calculate the quarterly time period they are allowed to redeem.  The contract would need to keep track of the total amt allowed for each quarter, and keep total of the SPC that each user has redeemed for the quarter and the total in all.  
+   

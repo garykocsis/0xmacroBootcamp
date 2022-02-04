@@ -1,12 +1,15 @@
 import { ethers } from "ethers"
+// import JSON 
 import SpaceICOJSON from '../artifacts/contracts/SpaceICO.sol/SpaceICO.json'
-
-
+import SpaceCoinJSON from '../artifacts/contracts/SpaceCoin.sol/SpaceCoin.json'
 const provider = new ethers.providers.Web3Provider(window.ethereum)
 const signer = provider.getSigner()
 
-const spaceicoAddr = '0x51F74F6d53e937046A4d6de9019C93781A7Ed264'
+
+const spaceicoAddr = '0x15Ec71Beb93A9813f6dafC7A2969b0871523488B'
 const contract = new ethers.Contract(spaceicoAddr, SpaceICOJSON.abi, provider);
+
+
 
 // Read on-chain data when clicking a button
 // getGreeting.addEventListener('click', async () => {
@@ -44,21 +47,37 @@ async function connectToMetamask() {
   submit.addEventListener('click', async () => {
     try {
       console.log("input: ", input.value)
-      await contract.connect(signer).contribute()
+
+      allowList = ['0x93a390f1098591892DcDdd8270c65FECF4963753'];      
+       await contract.toggleAllowList(allowList,true);
+       const eth = ethers.utils.parseEther(valueOutput.innerText)
+
+       await contract.connect(signer).contribute({
+        value: eth })
+     
       console.log("after contribute")
     }
     catch(err) {
       console.log("Error contributing 1",err.message)
-      errorOutput.innerText = "Error on Contribution"
+      //errorOutput.innerText = "Error on Contribution"
+      errorOutput.innerText = err.message
+
+
+      //console.log("x = ", JSON.parse(err.message))
+      //var obj =  JSON.parse(err.message)
+      //alert(obj.message);
+      //console.log("y =  ", obj.message)
     
       //const msgexist = err.message.search('revert') >= 0
       //console.log("error is",msgexist)
 
-    //  var errorMessageInJson = JSON.parse(
-     //     err.message.slice(0, err.message.length - 2))
+     // var errorMessageInJson = JSON.parse(
+     //    err.message.slice(0, err.message.length - 2))
      // )
-    // var errorMessageInJson = JSON.parse(
-    //  err.message.slice(58, err.message.length - 2))
+     console.log("before")
+     var obj = 
+     err.message.slice(100, err.message.length - 2)
+     console.log("after",obj)
      // var errorMessageToShow = errorMessageInJson.data.data[Object.keys(errorMessageInJson.data.data)[0]].reason;
 
      // console.log("error is"), (errorMessageToShow)
